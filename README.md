@@ -1,37 +1,38 @@
-# RC Low-Pass Filter Design and Analysis Using Cadence Virtuoso
+# Analog Low-Pass Filter Design and Analysis Using Cadence Virtuoso
 
 ## 📌 Project Overview
 
-This project demonstrates the design, mathematical analysis, and simulation of a first-order RC Low-Pass Filter (LPF) using **Cadence Virtuoso**.
+This repository documents the design, mathematical analysis, and simulation of different analog low-pass filter architectures using **Cadence Virtuoso**.
 
-The project involves theoretical cutoff frequency calculation, circuit schematic design, AC frequency-response analysis, and pole-zero analysis using the Analog Design Environment (ADE L).
+The project currently covers:
 
-The objective is to understand the frequency-domain behavior of an RC low-pass filter and verify its theoretical characteristics through circuit simulation.
+1. First-Order RC Low-Pass Filter
+2. Sallen-Key Active Low-Pass Filter
 
-## ⚙️ Circuit Specifications
+The designs involve circuit schematic development, theoretical analysis, AC frequency-response analysis, transient simulation, and pole-zero analysis. The objective is to understand the characteristics of different low-pass filter architectures and verify their theoretical behavior through circuit-level simulations.
 
-| Parameter              |                          Value |
-| ---------------------- | -----------------------------: |
-| Resistor (R)           |                           1 MΩ |
-| Capacitor (C)          |                           1 pF |
-| AC Input Voltage       |                            1 V |
-| Filter Type            | First-Order RC Low-Pass Filter |
-| Simulation Tool        |               Cadence Virtuoso |
-| Simulation Environment |                          ADE L |
+---
 
-## 🧮 Mathematical Calculation
+# 1. First-Order RC Low-Pass Filter
 
-The cutoff frequency of a first-order RC low-pass filter is given by:
+## Circuit Specifications
+
+| Parameter | Value |
+|---|---:|
+| Resistor (R) | 1 MΩ |
+| Capacitor (C) | 1 pF |
+| AC Input Voltage | 1 V |
+| Filter Type | First-Order RC Low-Pass Filter |
+| Simulation Tool | Cadence Virtuoso |
+| Simulation Environment | ADE L |
+
+## Mathematical Calculation
+
+The cutoff frequency of a first-order RC low-pass filter is:
 
 $$
 f_c = \frac{1}{2\pi RC}
 $$
-
-Where:
-
-- (R) = Resistance
-- (C) = Capacitance
-- (f_c) = Cutoff frequency
 
 Substituting the component values:
 
@@ -55,31 +56,14 @@ $$
 \boxed{f_c \approx 159.154 \text{ kHz}}
 $$
 
-## 🔌 Circuit Schematic
+## AC Simulation Setup
 
-The RC low-pass filter consists of a resistor connected in series with the input and a capacitor connected between the output node and ground.
-
-**Circuit configuration:**
-
-- Input signal: AC voltage source of 1 V.
-- Resistor: 1 MΩ.
-- Capacitor: 1 pF.
-- Output: Measured across the capacitor.
-
-
-
-## 🖥️ AC Simulation Setup
-
-The circuit was simulated using the **ADE L (Analog Design Environment L)** in Cadence Virtuoso.
-
-### AC Analysis Configuration
-
-| Setting         | Value     |
-| --------------- | --------- |
-| Analysis Type   | AC        |
-| Start Frequency | 1 Hz      |
-| Stop Frequency  | 1 GHz     |
-| Sweep Type      | Automatic |
+| Setting | Value |
+|---|---|
+| Analysis Type | AC |
+| Start Frequency | 1 Hz |
+| Stop Frequency | 1 GHz |
+| Sweep Type | Automatic |
 
 ### AC Simulation Results
 
@@ -89,51 +73,19 @@ The AC simulation demonstrates the expected low-pass filter characteristics:
 - Near the cutoff frequency, the output begins to decrease.
 - At higher frequencies, the capacitor increasingly attenuates the output signal.
 
-
-
 ### Theoretical vs. Simulated Results
 
-| Parameter                    |   Frequency |
-| ---------------------------- | ----------: |
+| Parameter | Frequency |
+|---|---:|
 | Theoretical Cutoff Frequency | 159.154 kHz |
-| Simulated Cutoff Frequency   | 158.644 kHz |
-| Difference                   |   0.510 kHz |
+| Simulated Cutoff Frequency | 158.644 kHz |
+| Difference | 0.510 kHz |
 
-The simulated result closely matches the theoretical calculation. The small discrepancy is attributed to the ideal assumptions used in the mathematical calculation compared with the simulation environment.
+The simulated result closely matches the theoretical calculation.
 
-## 📍 Pole-Zero Analysis
+## Pole-Zero Analysis
 
-Pole-zero analysis was also performed using the **ADE L** environment in Cadence Virtuoso to examine the filter's pole location.
-
-### Pole-Zero Analysis Configuration
-
-The following settings were used:
-
-| Parameter            | Configuration                      |
-| -------------------- | ---------------------------------- |
-| Analysis Type        | Pole-Zero (PZ)                     |
-| Output Type          | Voltage                            |
-| Positive Output Node | `/net2`                            |
-| Negative Output Node | Ground (left blank)                |
-| Input Source         | `/V2`                              |
-| Sweep Variable       | Component/Parameter (not selected) |
-
-### Analysis Procedure
-
-1. Open the ADE L simulation environment.
-2. Select **Pole-Zero Analysis (pz)** from the available analysis options.
-3. Configure the output type as voltage.
-4. Set the positive output node to `/net2`.
-5. Set the input voltage source to `/V2`.
-6. Leave the negative output node empty.
-7. Enable the analysis and run the simulation.
-8. Navigate to **Direct Plot → Main Form → PZ** to display the pole-zero plot.
-
-### Pole-Zero Plot
-
-
-
-The pole-zero plot provides a graphical representation of the filter's pole location in the complex frequency plane.
+Pole-zero analysis was performed using ADE L to examine the filter's pole location.
 
 For an ideal first-order RC low-pass filter, the transfer function is:
 
@@ -147,30 +99,90 @@ $$
 s = -\frac{1}{RC}
 $$
 
-This pole determines the filter's natural frequency response and contributes to its first-order roll-off characteristics.
+The pole determines the filter's natural frequency response and contributes to its first-order roll-off characteristics.
 
-## 🛠️ Tools and Technologies
+---
+
+# 2. Sallen-Key Active Low-Pass Filter
+
+## Project Overview
+
+Designed and simulated a Sallen-Key active low-pass filter using Cadence Virtuoso. The design extends the project from passive RC filtering to active filter architectures, allowing investigation of frequency response, gain characteristics, and transient behavior.
+
+## Circuit Design
+
+The Sallen-Key topology uses an active amplifier stage together with an RC network to implement a low-pass filtering response.
+
+**Design and simulation objectives:**
+
+- Develop the Sallen-Key filter schematic in Cadence Virtuoso.
+- Analyze the frequency-dependent gain and phase response.
+- Investigate the loop-gain characteristics of the active circuit.
+- Perform transient simulations to observe time-domain behavior.
+- Examine the relationship between circuit parameters and filter performance.
+
+## AC Frequency Response Analysis
+
+AC analysis was performed to investigate the frequency-dependent behavior of the Sallen-Key filter.
+
+The analysis focused on:
+
+- Magnitude response.
+- Phase response.
+- Passband gain.
+- Cutoff-frequency behavior.
+- High-frequency attenuation.
+
+### AC Response Plot
+
+![Sallen-Key AC Frequency Response](Sallen-Key/ac_out.png)
+
+## Loop-Gain Analysis
+
+Loop-gain analysis was performed to examine the feedback characteristics and frequency-dependent behavior of the active filter circuit.
+
+![Sallen-Key Loop Gain Analysis](Sallen-Key/loop%20gain.png)
+
+## Transient Analysis
+
+Transient simulation was performed to examine the time-domain response of the Sallen-Key filter under the applied input signal.
+
+![Sallen-Key Transient Response](Sallen-Key/transient%20output.png)
+
+## Design Implementation
+
+The Sallen-Key filter was designed and simulated using Cadence Virtuoso. The simulation results were examined in both frequency and time domains to understand the behavior of the active filter architecture.
+
+---
+
+# 🛠️ Tools and Technologies
 
 - Cadence Virtuoso
 - Analog Design Environment (ADE L)
+- GF180MCU
+- IHP SG13G2
 - AC Frequency Response Analysis
+- Transient Analysis
 - Pole-Zero Analysis
-- RC Circuit Design
+- Loop-Gain Analysis
+- Analog Circuit Design
 
-## 📚 Key Learning Outcomes
+# 📚 Key Learning Outcomes
 
-- Understanding the operation of a first-order RC low-pass filter.
-- Calculating the theoretical cutoff frequency.
-- Designing an RC circuit using Cadence Virtuoso.
-- Configuring and performing AC frequency-response analysis.
-- Understanding pole locations and their relationship to filter behavior.
-- Performing pole-zero analysis using ADE L.
-- Comparing theoretical calculations with simulation results.
+- Understanding passive and active low-pass filter architectures.
+- Designing and analyzing first-order RC filters.
+- Understanding Sallen-Key active filter topology.
+- Performing AC frequency-response analysis.
+- Investigating loop-gain and feedback characteristics.
+- Performing transient simulations.
+- Comparing theoretical filter characteristics with circuit-level simulation results.
+- Developing practical experience with analog circuit design using Cadence Virtuoso.
+
+---
 
 ## 👨‍💻 Author
 
 **Sheikh Tariful Islam**
 
-Electrical and Electronic Engineering
-
+Electrical and Electronic Engineering  
 Bangladesh University of Engineering and Technology (BUET)
